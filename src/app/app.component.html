@@ -1,7 +1,18 @@
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: page }">
+  <li class="list-group-item" *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: page, id:'first' }">
     {{item.id}} {{item.title}}
   </li>
 </ul>
 
-<pagination-controls (pageChange)="page= $event"></pagination-controls>
+<pagination-controls (pageChange)="page= $event" id="first"></pagination-controls>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let item of products | paginate: {itemsPerPage: 5, currentPage: product, id:'second' }">
+    <h3>{{item.id}} {{item.title}}</h3>
+    <p>{{item.description}}</p>
+    <div><img src="{{item.images}}" alt="" style="max-width: 200px;"></div>
+    <span>{{item.price}}</span>
+  </li>
+</ul>
+
+<pagination-controls (pageChange)="product= $event" id="second"></pagination-controls>
