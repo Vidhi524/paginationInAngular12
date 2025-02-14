@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PaginationInstance } from 'ngx-pagination';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,25 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   collection: any= [];
-  products: any= [];
   page: any;
-  product: any;
+  maxSize=9;
+  autoTrue: boolean = true;
+
+  public config: PaginationInstance = {
+    id: 'advanced',       // Corrected the syntax here
+    itemsPerPage: 5,
+    currentPage: 1
+  };
+  
+
+  // products: any= [];
+  // product: any;
 
   ngOnInit(): void {
     this.getCollectionData();
-    this.getProductsData()
+
+
+    // this.getProductsData()
   }
 
   getCollectionData(){
@@ -25,13 +38,21 @@ export class AppComponent {
     })
   }
 
-  getProductsData(){
-    fetch('https://dummyjson.com/products')
-    .then(res => res.json())
-    .then(r =>{
-      this.products=r.products;
-      // console.log(this.products);
-    });
+  // getProductsData(){
+  //   fetch('https://dummyjson.com/products')
+  //   .then(res => res.json())
+  //   .then(r =>{
+  //     this.products=r.products;
+  //     // console.log(this.products);
+  //   });
+  // }
+
+  onPageChange(event: any):void{
+    this.config.currentPage=event.page;
+  }
+
+  onPageBoundsCorrection(event: any):void{
+    this.config.currentPage=event.page;
   }
 
 }
