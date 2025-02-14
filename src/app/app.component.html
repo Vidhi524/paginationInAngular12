@@ -21,11 +21,25 @@
 <!-- advance -->
 
 
-<ul class="list-group">
+<!-- <ul class="list-group">
   <li class="list-group-item" *ngFor="let item of collection | paginate: config">
     {{item.id}} {{item.title}}
   </li>
 </ul>
 
 <pagination-controls id="config.id" (pageChange)="onPageChange($event)" (pageBoundCorrection)="onPageBoundsCorrection($event)" [maxSize]="maxSize" [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="< prev" nextLabel="next >">
-</pagination-controls>
+</pagination-controls> -->
+
+
+<div *ngIf="!loading">
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let item of collection | paginate: config">
+      <h3>{{item.id}} {{item.title}}</h3>
+      <p>{{item.body}}</p>
+    </li>
+  </ul>
+
+  <pagination-controls (pageChange)="getCollectionData($event)" id="server"></pagination-controls>
+</div>
+
+<div *ngIf="loading">Fetching Data....................</div>
